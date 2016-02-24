@@ -69,13 +69,13 @@ public class DockerBuildWrapper extends BuildWrapper {
 
     private String net;
 
-    private String args;
+    private String cmdArgs;
 
     @DataBoundConstructor
     public DockerBuildWrapper(DockerImageSelector selector, String dockerInstallation, DockerServerEndpoint dockerHost, String dockerRegistryCredentials, boolean verbose, boolean privileged,
                               List<Volume> volumes, String group, String command,
                               boolean forcePull,
-                              String net, String args) {
+                              String net, String cmdArgs) {
         this.selector = selector;
         this.dockerInstallation = dockerInstallation;
         this.dockerHost = dockerHost;
@@ -87,7 +87,7 @@ public class DockerBuildWrapper extends BuildWrapper {
         this.command = command;
         this.forcePull = forcePull;
         this.net = net;
-        this.args = args;
+        this.cmdArgs = cmdArgs;
     }
 
     public DockerImageSelector getSelector() {
@@ -204,7 +204,7 @@ public class DockerBuildWrapper extends BuildWrapper {
 
             return runInContainer.getDocker().runDetached(runInContainer.image, workdir,
                     runInContainer.getVolumes(build), runInContainer.getPortsMap(), links,
-                    environment, build.getSensitiveBuildVariables(), net, this.args,
+                    environment, build.getSensitiveBuildVariables(), net, this.cmdArgs,
                     command); // Command expected to hung until killed
 
         } catch (InterruptedException e) {
