@@ -204,7 +204,7 @@ public class DockerBuildWrapper extends BuildWrapper {
 
             return runInContainer.getDocker().runDetached(runInContainer.image, workdir,
                     runInContainer.getVolumes(build), runInContainer.getPortsMap(), links,
-                    environment, build.getSensitiveBuildVariables(), net,
+                    environment, build.getSensitiveBuildVariables(), net, this.args,
                     command); // Command expected to hung until killed
 
         } catch (InterruptedException e) {
