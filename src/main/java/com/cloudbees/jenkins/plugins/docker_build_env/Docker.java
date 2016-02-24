@@ -213,6 +213,9 @@ public class Docker implements Closeable {
             else
                 args.add(e.getKey()+"="+e.getValue());
         }
+
+        args.add(this.args);
+
         args.add(image).add(command);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
