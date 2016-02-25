@@ -321,10 +321,10 @@ public class Docker implements Closeable {
     public void executeIn(String container, String userId, Launcher.ProcStarter starter, EnvVars environment, String cmdArgs) throws IOException, InterruptedException {
         List<String> prefix = dockerCommandArgs();
         prefix.add("exec");
+        prefix.add(cmdArgs);
         prefix.add("--tty");
         prefix.add("--user");
         prefix.add(userId);
-        prefix.add(cmdArgs);
         prefix.add(container);
         prefix.add("env");
 
