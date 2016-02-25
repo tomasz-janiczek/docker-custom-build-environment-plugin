@@ -324,6 +324,7 @@ public class Docker implements Closeable {
         prefix.add("--tty");
         prefix.add("--user");
         prefix.add(userId);
+	prefix.add(this.cmdArgs);
         prefix.add(container);
         prefix.add("env");
 
