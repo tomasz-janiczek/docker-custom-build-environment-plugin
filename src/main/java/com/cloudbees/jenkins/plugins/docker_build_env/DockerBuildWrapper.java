@@ -75,7 +75,7 @@ public class DockerBuildWrapper extends BuildWrapper {
     public DockerBuildWrapper(DockerImageSelector selector, String dockerInstallation, DockerServerEndpoint dockerHost, String dockerRegistryCredentials, boolean verbose, boolean privileged,
                               List<Volume> volumes, String group, String command,
                               boolean forcePull,
-                              String net, String cmdArgs) {
+                              String net, String commandArgs) {
         this.selector = selector;
         this.dockerInstallation = dockerInstallation;
         this.dockerHost = dockerHost;
@@ -87,7 +87,7 @@ public class DockerBuildWrapper extends BuildWrapper {
         this.command = command;
         this.forcePull = forcePull;
         this.net = net;
-        this.cmdArgs = cmdArgs;
+        this.cmdArgs = commandArgs;
     }
 
     public DockerImageSelector getSelector() {
