@@ -22,15 +22,17 @@ public class DockerDecoratedLauncher extends Launcher.DecoratedLauncher {
     private final String userId;
     private EnvVars env;
     private final Launcher launcher;
+    private final String cmdArgs;
 
     public DockerDecoratedLauncher(DockerImageSelector selector, Launcher launcher, BuiltInContainer runInContainer,
-                                   AbstractBuild build, String userId) throws IOException, InterruptedException {
+                                   AbstractBuild build, String userId, String cmdArgs) throws IOException, InterruptedException {
         super(launcher);
         this.launcher = launcher;
         this.selector = selector;
         this.runInContainer = runInContainer;
         this.build = build;
         this.userId = userId;
+        this.cmdArgs = cmdArgs;
     }
 
     public Proc launch(String[] cmd, boolean[] mask, String[] env, InputStream in, OutputStream out, FilePath workDir) throws IOException {
@@ -45,7 +47,7 @@ public class DockerDecoratedLauncher extends Launcher.DecoratedLauncher {
 
         try {
             EnvVars environment = buildContainerEnvironment();
-            runInContainer.getDocker().executeIn(runInContainer.container, userId, starter, environment);
+            runInContainer.getDocker().executeIn(runInContainer.container, userId, starter, environment, this.cmdArgs);
         } catch (InterruptedException e) {
             throw new IOException("Caught InterruptedException", e);
         }
