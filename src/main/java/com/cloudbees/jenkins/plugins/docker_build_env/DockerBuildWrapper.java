@@ -139,7 +139,7 @@ public class DockerBuildWrapper extends BuildWrapper {
         final BuiltInContainer runInContainer = new BuiltInContainer(docker);
         build.addAction(runInContainer);
 
-        DockerDecoratedLauncher decorated = new DockerDecoratedLauncher(selector, launcher, runInContainer, build, whoAmI(launcher));
+        DockerDecoratedLauncher decorated = new DockerDecoratedLauncher(selector, launcher, runInContainer, build, whoAmI(launcher), this.cmdArgs);
         return decorated;
     }
 
